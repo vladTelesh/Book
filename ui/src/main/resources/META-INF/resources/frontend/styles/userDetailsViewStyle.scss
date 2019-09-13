@@ -1,0 +1,29 @@
+@import 'commonStyles.scss';
+
+.add-button, .edit-button, .save-button{
+  @extend %shared-for-button;
+  padding: 6px 30px;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+}
+
+.add-button:hover, .edit-button:hover {
+  background-color: $primary-color;
+  color: white;
+}
+
+.save-button {
+  @extend %shared-for-button;
+  width: 30px;
+  border: 1px solid #00be48;
+  color: #00be48;
+}
+
+.edit-button{
+  width: 30px;
+}
+
+.save-button:hover {
+  background-color: #00ca48;
+  color: white;
+}

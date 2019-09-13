@@ -1,0 +1,91 @@
+@import 'commonStyles.scss';
+
+.tooltip {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tooltip::after {
+  height: 98px;
+  font-size: 15px;
+  margin-top: -30px;
+  width: 160px;
+  margin-left: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  content: attr(data-tooltip);
+  opacity: 0;
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  transition: all 0.4s ease-in-out;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.label {
+  font-size: 20px;
+}
+
+.likes-count-label {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.like-icon {
+  cursor: pointer;
+  margin-right: 7px;
+}
+
+.dialog-close-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 150px
+}
+
+.text-area {
+  width: 68%;
+  height: fit-content;
+  align-self: center;
+}
+
+.user-comment {
+  width: 70%;
+  margin-top: 5%;
+}
+
+.edit-icon {
+  margin-top: 28px;
+  cursor: pointer;
+}
+
+.dialog-main-layout {
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.dialog-label {
+  font-size: 25px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.button {
+  @extend %shared-for-button;
+  border: 1px solid #555555;
+  color: black;
+  padding: 4px 30px;
+  margin-top: 4%;
+}
+
+.button:hover {
+  background-color: #4e4e4e;
+  color: white;
+}

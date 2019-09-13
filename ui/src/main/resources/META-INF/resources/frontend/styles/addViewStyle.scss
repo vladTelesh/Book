@@ -1,0 +1,106 @@
+@import 'commonStyles.scss';
+
+$background-color: #f8f8f8;
+
+body {
+  width: 100%;
+}
+
+.label-layout {
+  margin-top: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background-color: $background-color;
+}
+
+.label {
+  margin-left: 0;
+  font-size: 30px;
+  font-weight: $label-font-weight;
+  color: $primary-color;
+  margin-bottom: 0.5%;
+}
+
+.field-label {
+  margin-top: 6%;
+  margin-right: 10%;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+}
+
+.photo-field-label {
+  margin-right: 10%;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+}
+
+.date-of-birth-input {
+  margin-left: 4.7%;
+}
+
+.main-layout {
+  margin-left: 1.1%;
+}
+
+.create-button {
+  @extend %shared-for-button;
+  border: 1px solid $primary-color;
+  color: #3498db;
+}
+
+
+.create-button:hover {
+  background-color: $primary-color;
+  color: white;
+}
+
+.upload-button {
+  @extend %shared-for-button;
+  border: 1px solid #e5bd00;
+  color: #e5bd00;
+}
+
+.upload-button:hover {
+  background-color: #e5bd00;
+  color: white;
+}
+
+%label {
+  font-weight: bold;
+  color: #4e4e4e;
+  margin-bottom: 2%;
+}
+
+.biography-label {
+  @extend %label;
+  margin-top: 3%;
+}
+
+.author-photo-upload {
+  @extend %label;
+  margin-left: 12%;
+}
+
+.add-book-field-label {
+  margin-right: 10%;
+  font-weight: bold;
+  color: $label-font-color;
+}
+
+.fields-layout {
+  margin-top: 0;
+  padding: 20px 100px 20px 100px;
+  background-color: $background-color;
+  border: 1px solid $primary-color;
+  border-top: 0;
+}
+
+.hr {
+  margin-bottom: 0;
+  background-color: #3498db;
+}
+
+.bottom-hr {
+  @extend .hr;
+  margin-top: 0;
+}

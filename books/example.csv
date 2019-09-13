@@ -1,0 +1,5 @@
+BookDto id,Title,Author,Additional Authors,ISBN,ISBN13,My Rating,Average Rating,Publisher,Binding,Number of Pages,Year Published,Original Publication Year,Date Read,Date Added,Read Count,Description
+60081183-636e-4bbf-9c85-25d99accfbqq,Fathers and Sons,Vladimir Nabokov,Ivan Ivanov,"1602369458""""","9781607069454""""",4,5,Penguin Random House,Paperback,0,1990,1978,02-05-19,02-05-19,0,12345
+e838a0bd-d3b5-427d-81a2-7f4efab7a4qq,War and Peace,Phil Knight,Ivan Ivanov,"1608969458""""","9787897069454""""",3,4,Penguin Random House,Paperback,0,1990,1978,02-05-19,02-05-19,5,123456
+1112df63-61c5-4923-a9c6-9e8486666e22,War and Peace,William Shakespeare,Ivan Ivanov,"1600969458""""","9123607069454""""",5,5,Penguin Random House,Paperback,0,1990,1978,02-05-19,02-05-19,4,1234566
+51ebec6e-ff95-4785-92e2-c89e81d4677f,Eugene Onegin,Franz Kafka,Ivan Ivanov,"1601269458""""","9784607069454""""",2,0,Penguin Random House,Paperback,0,1990,1978,02-05-19,02-05-19,5,2132554

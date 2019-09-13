@@ -1,0 +1,102 @@
+@import 'commonStyles.scss';
+
+$label-font-size: 14px;
+
+.button {
+  @extend %shared-for-button;
+  border: 1px solid #555555;
+  color: black;
+  padding: 4px 30px;
+  margin-top: 2px;
+}
+
+.button:hover {
+  background-color: $label-font-color;
+  color: white;
+}
+
+.author-name-label {
+  font-size: 25px;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+}
+
+
+.bold-label {
+  font-size: 14px;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+}
+
+.normal-label {
+  font-size: 14px;
+  color: #3c3d3c;
+}
+
+.hidden-label {
+  font-size: 14px;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+  visibility: hidden;
+  margin-top: 3px;
+}
+
+.normal-label-with-margin-3 {
+  @extend .normal-label;
+  margin-top: 3px;
+}
+
+
+.bold-label-with-margin {
+  @extend .bold-label;
+  margin-top: 12px;
+}
+
+.normal-label-with-margin-12 {
+  @extend .normal-label;
+  margin-top: 12px;
+}
+
+.bold-label-with-margin-40 {
+  @extend .bold-label;
+  margin-top: 40px;
+}
+
+.text-area {
+  white-space: pre;
+}
+
+.books-preview-layout {
+  margin-top: 20px;
+}
+
+.anchor {
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
+  color: #3c3d3c
+}
+
+.image {
+  cursor: pointer;
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.dialog-biography{
+  margin-bottom: 5%;
+}
+
+.dialog-label {
+  font-size: 25px;
+  font-weight: $label-font-weight;
+  color: $primary-color;
+}
+
+.dialog-main-layout {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+

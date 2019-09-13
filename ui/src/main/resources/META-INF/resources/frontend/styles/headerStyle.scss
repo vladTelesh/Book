@@ -1,0 +1,40 @@
+@import 'commonStyles.scss';
+
+$sign-out-red-color: #ff3b37;
+
+.logo {
+  cursor: pointer;
+}
+
+.header-button {
+  @extend %shared-for-button;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+}
+
+.sign-out-button {
+  @extend %shared-for-button;
+  border: 1px solid $sign-out-red-color;
+  color: $sign-out-red-color;
+}
+
+.stats-button, .my-books-button {
+  @extend %shared-for-button;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  margin-top: 3%;
+}
+
+.header-button:hover, .stats-button:hover, .my-books-button:hover {
+  background-color: $primary-color;
+  color: white;
+}
+
+.sign-out-button:hover {
+  background-color: $sign-out-red-color;
+  color: white;
+}
+
+#current {
+  border-top: 5px;
+}
