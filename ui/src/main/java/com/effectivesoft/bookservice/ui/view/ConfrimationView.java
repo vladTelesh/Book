@@ -18,7 +18,7 @@ public class ConfrimationView extends VerticalLayout implements HasUrlParameter<
 
     private static final Logger logger = LoggerFactory.getLogger(ConfrimationView.class);
 
-    ConfrimationView(@Autowired UserRestClient userRestClient) {
+    public ConfrimationView(@Autowired UserRestClient userRestClient) {
         this.userRestClient = userRestClient;
     }
 

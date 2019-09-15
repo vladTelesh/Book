@@ -5,7 +5,6 @@ import com.effectivesoft.bookservice.common.dto.BookDto;
 import com.effectivesoft.bookservice.ui.client.AuthorRestClient;
 import com.effectivesoft.bookservice.ui.client.BookRestClient;
 import com.effectivesoft.bookservice.ui.component.AuthorComboBox;
-import com.effectivesoft.bookservice.ui.config.AuthorComboBoxConverter;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
@@ -18,13 +17,11 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.validator.StringLengthValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 

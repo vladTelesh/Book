@@ -1,13 +1,14 @@
 package com.effectivesoft.bookservice.ui.client;
 
+import com.effectivesoft.bookservice.ui.config.security.SecurityContextParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -20,7 +21,7 @@ public class RestClient {
     private static final Logger logger = LoggerFactory.getLogger(RestClient.class);
     private final ObjectMapper objectMapper;
 
-    public RestClient(ObjectMapper objectMapper) {
+    public RestClient(@Autowired ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -85,8 +86,7 @@ public class RestClient {
                     "Content-Type", "multipart/form-data;boundary=*****");
 
             if (SecurityContextHolder.getContext().getAuthentication() != null) {
-                if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserDetails)
-                    connection.setRequestProperty("Username", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+                connection.setRequestProperty("Username", SecurityContextParser.getEmail());
             }
 
             DataOutputStream request = new DataOutputStream(connection.getOutputStream());
@@ -183,8 +183,7 @@ public class RestClient {
     private void setHeaders(HttpURLConnection connection) {
         connection.setRequestProperty("Content-Type", "application/json");
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
-            if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserDetails)
-                connection.setRequestProperty("Username", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+            connection.setRequestProperty("Username", SecurityContextParser.getEmail());
         }
     }
 }

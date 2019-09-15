@@ -22,7 +22,8 @@ public class AuthorizationFilter implements Filter {
 
     private static final List<String> PERMITTED_URL = Arrays.asList(
             "/api/v1/users/login",
-            "/api/v1/users"
+            "/api/v1/users",
+            "/api/v1/users/google"
     );
 
     public AuthorizationFilter(UserService userService) {

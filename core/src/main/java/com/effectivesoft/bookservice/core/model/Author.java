@@ -4,7 +4,6 @@ import com.effectivesoft.bookservice.core.converter.LocalDatePersistenceConverte
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "author")

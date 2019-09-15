@@ -1,3 +1,6 @@
+alter table book 
+    change author author_id varchar(50);
+
 create table author
 (
     id             varchar(50)   not null,
@@ -17,6 +20,5 @@ alter table author
     add primary key (id);
 
 alter table book
-    rename column author_id to author_id,
     add constraint comment_user_id_fk
         foreign key (author_id) references author (id);

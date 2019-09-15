@@ -1,6 +1,7 @@
 package com.effectivesoft.bookservice.rest.controller;
 
 
+import com.effectivesoft.bookservice.common.dto.GoogleUserDto;
 import com.effectivesoft.bookservice.core.model.User;
 import com.effectivesoft.bookservice.rest.exception.InternalServerErrorException;
 import com.effectivesoft.bookservice.rest.service.UserProfileService;
@@ -43,6 +44,13 @@ public class UserController {
         return ResponseEntity.ok(mapper.map(user.orElseThrow(InternalServerErrorException::new), UserDto.class));
     }
 
+    @PostMapping("/google")
+    public ResponseEntity createGoogleUser(@Valid @RequestBody GoogleUserDto googleUserDto) {
+        Optional<User> user = userService.createGoogleUser(mapper.map(googleUserDto, User.class));
+
+        return ResponseEntity.ok(mapper.map(user.orElseThrow(InternalServerErrorException::new), UserDto.class));
+    }
+
     @GetMapping
     public ResponseEntity readUser() {
         Optional<User> user = userService.readUser(userProfileService.getUserId());
@@ -68,8 +76,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity readUserByUsername(@RequestBody String username) {
-        Optional<User> user = userService.readUserByUsername(username);
+    public ResponseEntity readUserByUsername(@RequestBody String username,
+                                             @RequestParam(value = "google") boolean google) {
+        Optional<User> user = userService.readUserByUsername(username, google);
         return user.<ResponseEntity>map(value -> ResponseEntity.ok(mapper.map(value, UserDto.class))).orElseGet(() ->
                 new ResponseEntity<>(404, HttpStatus.NOT_FOUND));
     }

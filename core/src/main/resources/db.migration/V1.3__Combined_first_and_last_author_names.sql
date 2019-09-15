@@ -1,5 +1,6 @@
+alter table author change first_name name varchar(50) not null;
+
+alter table author drop column last_name;
+
 alter table author
-    drop column last_name,
-    rename column name to name,
-    modify name varchar(40),
-    add column is_generated tinyint(1) default 0;
+    add is_generated tinyint(1) default 0 null;

@@ -6,7 +6,6 @@ import com.effectivesoft.bookservice.ui.client.UserRestClient;
 import com.effectivesoft.bookservice.ui.component.Header;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Hr;
@@ -29,7 +28,6 @@ import java.util.Optional;
 @Route("new/author")
 @PageTitle("New author • Book-service")
 @StyleSheet(value = "styles/addViewStyle.css")
-@JavaScript("")
 public class NewAuthorView extends HorizontalLayout {
 
     private final UserRestClient userRestClient;

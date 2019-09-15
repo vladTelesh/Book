@@ -1,8 +1,6 @@
 package com.effectivesoft.bookservice.rest.config.dozer;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 import org.dozer.DozerConverter;
 

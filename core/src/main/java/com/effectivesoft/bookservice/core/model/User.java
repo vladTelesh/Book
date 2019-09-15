@@ -4,7 +4,6 @@ import com.effectivesoft.bookservice.core.converter.LocalDatePersistenceConverte
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "user")
@@ -31,6 +30,8 @@ public class User {
     private Boolean confirmed;
     @Column(name = "confirmation_code")
     private String code;
+    @Column(name = "is_google")
+    private boolean google;
 
     public String getId() {
         return id;
@@ -110,5 +111,13 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public boolean isGoogle() {
+        return google;
+    }
+
+    public void setGoogle(boolean google) {
+        this.google = google;
     }
 }

@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.rest.exception;
 
-
 import com.effectivesoft.bookservice.common.error.ApiError;
 import com.effectivesoft.bookservice.common.error.Error;
 import org.springframework.http.HttpHeaders;

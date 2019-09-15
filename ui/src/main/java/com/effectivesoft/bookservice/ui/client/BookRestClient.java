@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.ui.client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.effectivesoft.bookservice.common.dto.BookDto;
@@ -19,7 +18,7 @@ public class BookRestClient extends RestClient {
 
     private final ObjectMapper objectMapper;
 
-    BookRestClient(@Autowired ObjectMapper objectMapper) {
+    BookRestClient(@Autowired ObjectMapper objectMapper){
         super(objectMapper);
         this.objectMapper = objectMapper;
     }

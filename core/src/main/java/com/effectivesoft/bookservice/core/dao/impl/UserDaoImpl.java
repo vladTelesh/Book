@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
@@ -50,12 +51,31 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         entityManager.merge(user);
     }
 
-    public Optional<User> readByUsername(String username) {
+    public Optional<User> readByUsername(String username, boolean google) {
+        try {
+            return Optional.ofNullable((User) entityManager.createNativeQuery("SELECT * FROM user WHERE username = ?1 AND is_confirm = ?2 AND is_google = ?3", User.class)
+                    .setParameter(1, username)
+                    .setParameter(2, true)
+                    .setParameter(3, google)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            logger.warn(e.getMessage());
+            logger.error("" + google);
+            logger.error("" + username);
+            return Optional.empty();
+        }
+    }
 
-        return Optional.ofNullable((User) entityManager.createNativeQuery("SELECT * FROM user WHERE username = ?1 AND is_confirm = ?2", User.class)
-                .setParameter(1, username)
-                .setParameter(2, true)
-                .getSingleResult());
+    public Optional<User> readByUsername(String username) {
+        try {
+            return Optional.ofNullable((User) entityManager.createNativeQuery("SELECT * FROM user WHERE username = ?1 AND is_confirm = ?2", User.class)
+                    .setParameter(1, username)
+                    .setParameter(2, true)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            logger.warn(e.getMessage());
+            return Optional.empty();
+        }
     }
 
     @Override

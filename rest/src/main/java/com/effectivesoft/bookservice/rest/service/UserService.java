@@ -1,6 +1,8 @@
 package com.effectivesoft.bookservice.rest.service;
 
+import com.effectivesoft.bookservice.core.dao.ImageDao;
 import com.effectivesoft.bookservice.core.dao.UserDao;
+import com.effectivesoft.bookservice.core.model.Image;
 import com.effectivesoft.bookservice.core.model.User;
 import com.effectivesoft.bookservice.core.model.enums.UserStatus;
 import com.effectivesoft.bookservice.common.dto.PasswordsDto;
@@ -25,12 +27,16 @@ public class UserService {
     String link;
     private final UserDao userDao;
     private final JavaMailSender javaMailSender;
+    private final ImageDao imageDao;
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    UserService(@Autowired UserDao userDao, JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
+    UserService(@Autowired UserDao userDao,
+                @Autowired ImageDao imageDao,
+                @Autowired JavaMailSender javaMailSender) {
         this.userDao = userDao;
+        this.imageDao = imageDao;
+        this.javaMailSender = javaMailSender;
     }
 
     @Transactional
@@ -51,12 +57,36 @@ public class UserService {
         return optionalUser;
     }
 
+    @Transactional
+    public Optional<User> createGoogleUser(User user) {
+        user.setId(UUID.randomUUID().toString());
+        user.setUserStatus(UserStatus.STATUS_ACTIVE.toString());
+        user.setConfirmed(true);
+        user.setGoogle(true);
+
+        Image image = new Image();
+        image.setId(UUID.randomUUID().toString());
+        image.setUserId(user.getId());
+        image.setLink(user.getPhotoLink());
+        image.setMain(true);
+
+        if (imageDao.create(image).isPresent()) {
+            return userDao.create(user);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+
     public Optional<User> readUser(String id) {
         return userDao.read(id);
     }
 
+    public Optional<User> readUserByUsername(String username, boolean google) {
+        return userDao.readByUsername(username, google);
+    }
+
     public Optional<User> readUserByUsername(String username) {
-        Optional<User> user = userDao.readByUsername(username);
         return userDao.readByUsername(username);
     }
 
@@ -72,7 +102,7 @@ public class UserService {
             return false;
         }
 
-        Optional<User> user = userDao.readByUsername(username);
+        Optional<User> user = userDao.readByUsername(username, false);
         if (user.isEmpty()) {
             return false;
         }

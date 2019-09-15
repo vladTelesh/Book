@@ -6,6 +6,7 @@ import com.effectivesoft.bookservice.ui.client.UserRestClient;
 import com.effectivesoft.bookservice.ui.component.dialog.BookDialog;
 import com.effectivesoft.bookservice.ui.component.Header;
 import com.effectivesoft.bookservice.ui.component.grid.UserBooksGridComponent;
+import com.effectivesoft.bookservice.ui.config.security.SecurityContextParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -30,8 +31,6 @@ import com.effectivesoft.bookservice.common.dto.UserBookDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,8 +53,7 @@ public class UserBooksView extends HorizontalLayout implements HasDynamicTitle {
         this.bookRestClient = bookRestClient;
         this.userRestClient = userRestClient;
 
-        title = "User's books • " + ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() +
-                " • Book-service";
+        title = "User's books • " + SecurityContextParser.getEmail() + " • Book-service";
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 

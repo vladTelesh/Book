@@ -1,30 +1,26 @@
 package com.effectivesoft.bookservice.ui.component;
 
 import com.effectivesoft.bookservice.ui.client.UserRestClient;
+import com.effectivesoft.bookservice.ui.config.security.SecurityContextParser;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.select.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 @StyleSheet("styles/headerStyle.css")
 public class Header extends HorizontalLayout {
 
-    private String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-
     private String profileMainImageLink;
 
-    public Header(UserRestClient userRestClient) throws IOException {
+    public Header(@Autowired UserRestClient userRestClient) throws IOException {
         this.profileMainImageLink = userRestClient.readUserMainImage();
         setWidthFull();
 
@@ -70,6 +66,9 @@ public class Header extends HorizontalLayout {
         Select<Button> select = new Select<>();
         select.setClassName("select");
         select.setEmptySelectionAllowed(true);
+
+        String username = SecurityContextParser.getEmail();
+
         select.setEmptySelectionCaption(username);
         select.addComponents(null, new Hr());
 
@@ -86,9 +85,16 @@ public class Header extends HorizontalLayout {
             UI.getCurrent().navigate("stats");
         });
 
-        select.add(profile, myBooksButton, stats);
+        Div settings = new Div();
+        settings.setClassName("settings-button");
+        settings.add("Settings");
+        settings.addClickListener(onClick -> {
+            UI.getCurrent().navigate("settings");
+        });
 
-        select.addComponentAtIndex(5, new Hr());
+        select.add(profile, myBooksButton, stats, settings);
+
+        select.addComponentAtIndex(6, new Hr());
 
         Div signOut = new Div();
         signOut.setClassName("sign-out-button");
@@ -96,6 +102,7 @@ public class Header extends HorizontalLayout {
         signOut.addClickListener(onClick -> {
             SecurityContextHolder.clearContext();
             UI.getCurrent().navigate("sign_in");
+            UI.getCurrent().getPage().reload();
         });
 
         select.add(signOut);

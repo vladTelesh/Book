@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.ui.component.grid;
 
-
 import com.vaadin.flow.component.grid.Grid;
 import com.effectivesoft.bookservice.common.dto.BookDto;
 import com.vaadin.flow.component.html.Anchor;

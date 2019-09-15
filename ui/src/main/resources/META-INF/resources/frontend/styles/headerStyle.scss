@@ -18,14 +18,14 @@ $sign-out-red-color: #ff3b37;
   color: $sign-out-red-color;
 }
 
-.stats-button, .my-books-button {
+.stats-button, .my-books-button, .settings-button {
   @extend %shared-for-button;
   border: 1px solid $primary-color;
   color: $primary-color;
   margin-top: 3%;
 }
 
-.header-button:hover, .stats-button:hover, .my-books-button:hover {
+.header-button:hover, .stats-button:hover, .my-books-button:hover, .settings-button:hover {
   background-color: $primary-color;
   color: white;
 }
@@ -33,8 +33,4 @@ $sign-out-red-color: #ff3b37;
 .sign-out-button:hover {
   background-color: $sign-out-red-color;
   color: white;
-}
-
-#current {
-  border-top: 5px;
 }

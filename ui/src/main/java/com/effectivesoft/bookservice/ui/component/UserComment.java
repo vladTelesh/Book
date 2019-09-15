@@ -13,7 +13,6 @@ import com.effectivesoft.bookservice.common.dto.CommentDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserComment extends HorizontalLayout {

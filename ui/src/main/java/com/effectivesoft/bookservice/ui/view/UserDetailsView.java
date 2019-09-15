@@ -3,6 +3,7 @@ package com.effectivesoft.bookservice.ui.view;
 import com.effectivesoft.bookservice.ui.client.UserRestClient;
 import com.effectivesoft.bookservice.ui.component.Header;
 import com.effectivesoft.bookservice.ui.component.ImagePicker;
+import com.effectivesoft.bookservice.ui.config.security.SecurityContextParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -27,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -53,8 +53,8 @@ public class UserDetailsView extends HorizontalLayout implements HasDynamicTitle
             return;
         }
 
-        title = "Profile • " + ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() +
-                " • Book-service";
+        title = "Profile • " + SecurityContextParser.getEmail() + " • Book-service";
+
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
 
@@ -95,7 +95,11 @@ public class UserDetailsView extends HorizontalLayout implements HasDynamicTitle
         TextField lastName = new TextField("Last name");
         lastName.setWidthFull();
         lastName.setReadOnly(true);
-        lastName.setValue(user.getLastName());
+        if (user.getLastName() != null) {
+            lastName.setValue(user.getLastName());
+        } else {
+            lastName.setValue("");
+        }
         binder.forField(lastName)
                 .withValidator(value -> value.length() >= 4, "Last name must contain at least 4 characters")
                 .bind(UserDto::getLastName, UserDto::setLastName);
@@ -271,6 +275,10 @@ public class UserDetailsView extends HorizontalLayout implements HasDynamicTitle
     }
 
     private boolean isChanged(UserDto user, TextField firstName, TextField lastName, DatePicker dateOfBirth) {
+        if (user.getDateOfBirth() == null) {
+            return true;
+        }
+
         return !user.getFirstName().equals(firstName.getValue().trim())
                 || !user.getLastName().equals(lastName.getValue().trim())
                 || !user.getDateOfBirth().equals(dateOfBirth.getValue());

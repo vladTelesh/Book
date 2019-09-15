@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.rest.controller;
 
-
 import com.effectivesoft.bookservice.common.dto.AnnualUserStatsDto;
 import com.effectivesoft.bookservice.common.dto.MonthlyUserStatsDto;
 import com.effectivesoft.bookservice.core.model.MonthlyUserStats;

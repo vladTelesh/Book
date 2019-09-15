@@ -2,7 +2,6 @@ package com.effectivesoft.bookservice.core.dao;
 
 import com.effectivesoft.bookservice.core.model.Book;
 
-import java.math.BigInteger;
 import java.util.List;
 
 

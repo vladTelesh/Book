@@ -1,0 +1,57 @@
+@import 'commonStyles';
+
+body {
+  width: 100%;
+}
+
+.tooltip {
+  @extend %tooltip;
+
+  margin: auto auto auto 10%;
+}
+
+.tooltip::after {
+  @extend %tooltip-after;
+
+  height: 50px;
+  margin-top: -10px;
+  width: 169px;
+  margin-left: 20px;
+}
+
+.tooltip:hover::after {
+  @extend %tooltip-hover-after
+}
+
+.settings-label-layout {
+  margin-top: 0;
+}
+
+.settings-label {
+  font-size: 30px;
+  font-weight: $label-font-weight;
+  color: $label-font-color;
+}
+
+.goal-label {
+  @extend .settings-label;
+  font-size: 20px;
+}
+
+.info-icon {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.save-button {
+  @extend %shared-for-button;
+  margin-top: 1.5%;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+}
+
+.save-button:hover{
+  background-color: $primary-color;
+  color: white;
+}
+

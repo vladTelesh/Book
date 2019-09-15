@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.ui.view;
 
-
 import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.ui.client.AuthorRestClient;
 import com.effectivesoft.bookservice.ui.client.UserRestClient;

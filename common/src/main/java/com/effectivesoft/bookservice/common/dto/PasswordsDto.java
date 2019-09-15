@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.common.dto;
 
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 

@@ -2,9 +2,12 @@ package com.effectivesoft.bookservice.ui.view;
 
 import com.effectivesoft.bookservice.common.dto.AnnualUserStatsDto;
 import com.effectivesoft.bookservice.common.dto.MonthlyUserStatsDto;
+import com.effectivesoft.bookservice.common.dto.UserGoalProgressDto;
 import com.effectivesoft.bookservice.ui.client.UserBookRestClient;
+import com.effectivesoft.bookservice.ui.client.UserGoalRestClient;
 import com.effectivesoft.bookservice.ui.client.UserRestClient;
 import com.effectivesoft.bookservice.ui.component.Header;
+import com.effectivesoft.bookservice.ui.config.security.SecurityContextParser;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -19,8 +22,6 @@ import com.vaadin.flow.router.Route;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Route("stats")
 @StyleSheet("styles/userStatsViewStyle.css")
@@ -37,22 +39,26 @@ public class UserStatsView extends HorizontalLayout implements HasDynamicTitle {
 
     private final UserRestClient userRestClient;
     private final UserBookRestClient userBookRestClient;
+    private final UserGoalRestClient userGoalRestClient;
 
     private static final Logger logger = LoggerFactory.getLogger(UserStatsView.class);
 
     public UserStatsView(@Autowired UserRestClient userRestClient,
+                         @Autowired UserGoalRestClient userGoalRestClient,
                          @Autowired UserBookRestClient userBookRestClient) throws IOException {
         this.userRestClient = userRestClient;
+        this.userGoalRestClient = userGoalRestClient;
         this.userBookRestClient = userBookRestClient;
         this.load();
     }
 
     private void load() throws IOException {
-        title = "Stats • " + ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() +
-                " • Book-service";
+        title = "Stats • " + SecurityContextParser.getEmail() + " • Book-service";
 
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
+        getElement().removeAttribute("theme");
+        getElement().setAttribute("theme", "spacing");
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.setWidth("70%");
@@ -67,11 +73,69 @@ public class UserStatsView extends HorizontalLayout implements HasDynamicTitle {
             selectItems.add(i);
         }
 
+        Optional<UserGoalProgressDto> userGoalProgress = userGoalRestClient.readUserGoalProgress();
+
+        HorizontalLayout progressLabelLayout = new HorizontalLayout();
+        progressLabelLayout.setAlignItems(Alignment.CENTER);
+        progressLabelLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+        progressLabelLayout.setClassName("label-layout");
+
+        Label progressLabel = new Label("Progress");
+        progressLabel.setClassName("progress-label");
+
+        progressLabelLayout.add(progressLabel);
+
+        verticalLayout.add(progressLabelLayout, new Hr());
+
+        if (userGoalProgress.isPresent()) {
+
+            HorizontalLayout progressLayout = new HorizontalLayout();
+            progressLayout.setWidth("70%");
+            progressLayout.setClassName("progress-layout");
+            progressLayout.setAlignItems(Alignment.CENTER);
+            progressLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+
+            Label nullLabel = new Label("0");
+            nullLabel.setClassName("null-label");
+
+            Label goalLabel = new Label("Goal [" + userGoalProgress.get().getGoal() + "]");
+            goalLabel.setClassName("stats-goal-label");
+
+            HorizontalLayout progressBar = new HorizontalLayout();
+            progressBar.setWidth("500px");
+            progressBar.setAlignItems(Alignment.CENTER);
+            progressBar.setClassName("progress-bar");
+
+            Label l = new Label("1");
+            l.setClassName("hidden");
+
+            double read = userGoalProgress.get().getRead().doubleValue();
+            double goal = userGoalProgress.get().getGoal().doubleValue();
+            double progress = read / goal;
+
+            Div progressDiv = new Div();
+            if (progress <= 1) {
+                progressDiv.setWidth("" + 500 * progress + "px");
+            } else {
+                progressDiv.setWidth("500px");
+            }
+            progressDiv.setClassName("progress");
+            progressDiv.add(l);
+
+            progressBar.add(progressDiv);
+
+            progressLayout.add(nullLabel, progressBar, goalLabel);
+
+            verticalLayout.add(progressLayout, new Hr());
+        } else {
+            verticalLayout.add(new Label("No goal!"), new Hr());
+        }
+
         HorizontalLayout annualLabelLayout = new HorizontalLayout();
         annualLabelLayout.setWidthFull();
         annualLabelLayout.setAlignItems(Alignment.CENTER);
         annualLabelLayout.setJustifyContentMode(JustifyContentMode.CENTER);
-        annualLabelLayout.getElement().setAttribute("style", "margin-top: 0;");
+        annualLabelLayout.setClassName("label-layout");
 
         Label annualLabel = new Label("Annual statistics");
         annualLabel.setClassName("annual-label");
@@ -141,7 +205,7 @@ public class UserStatsView extends HorizontalLayout implements HasDynamicTitle {
         monthlyLabelLayout.setWidthFull();
         monthlyLabelLayout.setAlignItems(Alignment.CENTER);
         monthlyLabelLayout.setJustifyContentMode(JustifyContentMode.CENTER);
-        monthlyLabelLayout.getElement().setAttribute("style", "margin-top: 0;");
+        monthlyLabelLayout.setClassName("label-layout");
 
         Label monthlyLabel = new Label("Monthly statistics");
         monthlyLabel.setClassName("monthly-label");
@@ -174,8 +238,6 @@ public class UserStatsView extends HorizontalLayout implements HasDynamicTitle {
         verticalLayout.add(monthlyLabelLayout, new Hr(), yearLayout, monthlyChartDiv);
 
         addMonthlyStatsChart(year.getValue());
-
-        verticalLayout.add(new Hr(), new Hr(), new Hr());
 
         add(verticalLayout);
     }

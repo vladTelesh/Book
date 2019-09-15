@@ -2,12 +2,11 @@ package com.effectivesoft.bookservice.ui.client;
 
 import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.common.dto.BookDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -20,7 +19,7 @@ public class AuthorRestClient extends RestClient {
 
     private final ObjectMapper objectMapper;
 
-    public AuthorRestClient(ObjectMapper objectMapper) {
+    public AuthorRestClient(@Autowired ObjectMapper objectMapper) {
         super(objectMapper);
         this.objectMapper = objectMapper;
     }

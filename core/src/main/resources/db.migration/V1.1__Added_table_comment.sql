@@ -9,6 +9,7 @@ alter table user
         unique (confirmation_code);
 
 alter table user_book
+    modify id bigint auto_increment,
     add column user_comment varchar(200) not null,
     modify column date_read date,
     modify column date_added date;

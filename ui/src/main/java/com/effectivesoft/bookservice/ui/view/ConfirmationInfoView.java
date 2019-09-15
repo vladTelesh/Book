@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.ui.view;
 
-
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;

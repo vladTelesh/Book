@@ -31,7 +31,8 @@ public class MainView extends HorizontalLayout {
 
     private static final Logger logger = LoggerFactory.getLogger(MainView.class);
 
-    public MainView(@Autowired BookRestClient bookRestClient, UserRestClient userRestClient) throws IOException {
+    public MainView(@Autowired BookRestClient bookRestClient,
+                    @Autowired UserRestClient userRestClient) throws IOException {
         this.bookRestClient = bookRestClient;
         this.userRestClient = userRestClient;
 

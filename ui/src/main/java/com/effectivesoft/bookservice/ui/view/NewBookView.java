@@ -1,7 +1,5 @@
 package com.effectivesoft.bookservice.ui.view;
 
-
-import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.common.dto.BookDto;
 import com.effectivesoft.bookservice.ui.client.AuthorRestClient;
 import com.effectivesoft.bookservice.ui.client.BookRestClient;
@@ -10,7 +8,6 @@ import com.effectivesoft.bookservice.ui.component.AuthorComboBox;
 import com.effectivesoft.bookservice.ui.component.Header;
 import com.effectivesoft.bookservice.ui.config.AuthorComboBoxConverter;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Hr;

@@ -3,9 +3,7 @@ package com.effectivesoft.bookservice.core.model;
 import com.effectivesoft.bookservice.core.converter.LocalDatePersistenceConverter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "user_book")

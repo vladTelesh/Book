@@ -3,10 +3,8 @@ package com.effectivesoft.bookservice.ui.component;
 import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.common.dto.BookDto;
 import com.effectivesoft.bookservice.ui.client.AuthorRestClient;
-import com.effectivesoft.bookservice.ui.config.AuthorComboBoxConverter;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

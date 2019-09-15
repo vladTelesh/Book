@@ -3,7 +3,6 @@ package com.effectivesoft.bookservice.core.dao;
 import com.effectivesoft.bookservice.core.model.Comment;
 import com.effectivesoft.bookservice.core.model.User;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface CommentDao extends BaseDao<Comment> {

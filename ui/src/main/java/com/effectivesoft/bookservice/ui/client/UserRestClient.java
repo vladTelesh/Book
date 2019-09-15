@@ -1,5 +1,6 @@
 package com.effectivesoft.bookservice.ui.client;
 
+import com.effectivesoft.bookservice.common.dto.GoogleUserDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @Component
 public class UserRestClient extends RestClient {
-    private final String DEFAULT_USER_MAIN_IMAGE_LINK = "https://i.ibb.co/JH6g0T7/no-image.png";
+    private static final String DEFAULT_USER_MAIN_IMAGE_LINK = "https://i.ibb.co/JH6g0T7/no-image.png";
     private final ObjectMapper objectMapper;
 
     public UserRestClient(@Autowired ObjectMapper objectMapper) {
@@ -29,7 +30,12 @@ public class UserRestClient extends RestClient {
         return response.filter(value -> value.getStatusCode() == 200).isPresent();
     }
 
-    public boolean createUserImage(String filename, String fileContentType, byte[] byteArray){
+    public boolean createGoogleUser(GoogleUserDto googleUser) throws JsonProcessingException {
+        Optional<Response> response = postRequest("/users/google", googleUser);
+        return response.filter(value -> value.getStatusCode() == 200).isPresent();
+    }
+
+    public boolean createUserImage(String filename, String fileContentType, byte[] byteArray) {
         Optional<Response> response = postRequest("/users/images", filename, fileContentType, byteArray);
         return response.filter(value -> value.getStatusCode() == 200).isPresent();
     }
@@ -47,10 +53,23 @@ public class UserRestClient extends RestClient {
         }
     }
 
+    public Optional<UserDto> readUser(String username, boolean google) throws IOException {
+        Optional<Response> response = postRequest("/users/login?google=" + google, username);
+        if (response.isPresent()) {
+            if (response.get().getStatusCode() == 200) {
+                return Optional.ofNullable(objectMapper.readValue(response.get().getBody(), UserDto.class));
+            } else {
+                return Optional.empty();
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
     public String readUserMainImage() throws IOException {
         Optional<Response> response = getRequest("/users/images/main");
-        if(response.isPresent()){
-            if(response.get().getStatusCode() == 200){
+        if (response.isPresent()) {
+            if (response.get().getStatusCode() == 200) {
                 return (objectMapper.readValue(response.get().getBody(), ImageDto.class)).getLink();
             }
         }
@@ -60,7 +79,7 @@ public class UserRestClient extends RestClient {
     public List<ImageDto> readUserImages() throws IOException {
         Optional<Response> response = getRequest("/users/images");
         if (response.isPresent()) {
-            if(response.get().getStatusCode() == 200) {
+            if (response.get().getStatusCode() == 200) {
                 return objectMapper.readValue(response.get().getBody(), new TypeReference<List<ImageDto>>() {
                 });
             }
@@ -86,18 +105,5 @@ public class UserRestClient extends RestClient {
     public boolean confirmUser(String code) {
         Optional<Response> response = getRequest("/users" + "/confirm/" + code);
         return response.filter(value -> value.getStatusCode() == 200).isPresent();
-    }
-
-    public Optional<UserDto> loadUserByUsername(String username) throws IOException {
-        Optional<Response> response = postRequest("/users/login", username);
-        if (response.isPresent()) {
-            if (response.get().getStatusCode() == 200) {
-                return Optional.ofNullable(objectMapper.readValue(response.get().getBody(), UserDto.class));
-            } else {
-                return Optional.empty();
-            }
-        } else {
-            return Optional.empty();
-        }
     }
 }

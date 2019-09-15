@@ -13,3 +13,28 @@ $label-font-color: #4e4e4e;
   transition-duration: 0.4s;
   cursor: pointer;
 }
+
+%tooltip {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+%tooltip-after {
+  font-size: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  content: attr(data-tooltip);
+  opacity: 0;
+  padding: 3px 7px;
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  transition: all 0.4s ease-in-out;
+}
+
+%tooltip-hover-after {
+  opacity: 1;
+  visibility: visible;
+}

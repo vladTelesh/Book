@@ -1,6 +1,5 @@
 package com.effectivesoft.bookservice.ui.component.dialog;
 
-
 import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.ui.client.AuthorRestClient;
 import com.vaadin.flow.component.UI;

@@ -4,14 +4,12 @@ import com.effectivesoft.bookservice.core.dao.AbstractDao;
 import com.effectivesoft.bookservice.core.dao.CommentDao;
 import com.effectivesoft.bookservice.core.model.Comment;
 import com.effectivesoft.bookservice.core.model.User;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Repository

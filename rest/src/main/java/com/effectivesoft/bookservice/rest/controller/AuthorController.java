@@ -1,11 +1,9 @@
 package com.effectivesoft.bookservice.rest.controller;
 
-
 import com.effectivesoft.bookservice.common.dto.AuthorDto;
 import com.effectivesoft.bookservice.common.dto.BookDto;
 import com.effectivesoft.bookservice.core.model.Author;
 import com.effectivesoft.bookservice.core.model.Book;
-import com.effectivesoft.bookservice.core.model.Image;
 import com.effectivesoft.bookservice.rest.exception.InternalServerErrorException;
 import com.effectivesoft.bookservice.rest.service.AuthorService;
 import com.effectivesoft.bookservice.rest.service.RequestParser;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

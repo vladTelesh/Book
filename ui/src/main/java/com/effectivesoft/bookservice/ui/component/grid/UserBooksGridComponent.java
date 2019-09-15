@@ -1,7 +1,6 @@
 package com.effectivesoft.bookservice.ui.component.grid;
 
 import com.effectivesoft.bookservice.common.dto.UserBookDto;
-import com.effectivesoft.bookservice.ui.component.grid.PaginatedGridComponent;
 import com.vaadin.flow.component.html.Anchor;
 
 public class UserBooksGridComponent extends PaginatedGridComponent<UserBookDto> {

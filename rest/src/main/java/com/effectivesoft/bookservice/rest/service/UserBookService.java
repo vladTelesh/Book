@@ -7,7 +7,6 @@ import com.effectivesoft.bookservice.common.dto.UserBookDto;
 import com.effectivesoft.bookservice.core.model.AnnualUserStats;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

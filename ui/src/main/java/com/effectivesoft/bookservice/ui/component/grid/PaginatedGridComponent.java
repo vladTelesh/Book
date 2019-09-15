@@ -5,7 +5,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-import java.awt.*;
 import java.util.stream.Collectors;
 
 @StyleSheet(value = "styles/gridButtonsStyle.css")

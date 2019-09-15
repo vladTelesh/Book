@@ -63,10 +63,20 @@
             <a>author.id</a>
             <b>authorId</b>
         </field>
-        
+
         <field>
             <a>author.name</a>
             <b>authorName</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.effectivesoft.bookservice.core.model.User</class-a>
+        <class-b>com.effectivesoft.bookservice.common.dto.GoogleUserDto</class-b>
+
+        <field>
+            <a>firstName</a>
+            <b>name</b>
         </field>
     </mapping>
 </mappings>

@@ -1,5 +1,9 @@
 @import 'commonStyles';
 
+body {
+  width: 100%;
+}
+
 .chart-container {
   display: flex;
   justify-content: center;
@@ -9,7 +13,7 @@
 }
 
 vaadin-list-box {
-  height: 230px;
+  height: 270px;
 }
 
 .duration-layout {
@@ -21,13 +25,13 @@ vaadin-list-box {
   height: 60px;
 }
 
-body {
-  width: 100%;
-}
-
 .annual-label {
   font-size: 30px;
   font-weight: bold;
+}
+
+.progress-label {
+  @extend .annual-label;
 }
 
 .monthly-label {
@@ -36,4 +40,35 @@ body {
 
 .from {
   margin-left: 2.5%;
+}
+
+.label-layout {
+  margin-top: 0;
+}
+
+.stats-goal-label {
+  color: #4e4e4e;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.null-label {
+  @extend .stats-goal-label;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.progress {
+  background-color: $primary-color;
+}
+
+.progress-bar {
+  border: 1px solid $primary-color;
+}
+
+.progress-layout {
+  margin-bottom: 1.3%;
 }
